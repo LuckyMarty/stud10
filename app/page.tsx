@@ -1,26 +1,44 @@
+import Link from "next/link";
+import { api } from "../lib/strapi";
 import FadeInSection from "../components/FadeInSection";
 
 export const metadata = {
-  title: "Accueil - Site Animé",
-  description: "Page d'accueil avec Next.js (App Router) et Framer Motion."
+  title: "Blog - Animé avec Strapi",
+  description: "Liste des articles depuis Strapi CMS",
 };
 
-export default function HomePage() {
-  return (
-    <>
-      <header style={{ textAlign: "center", padding: "40px" }}>
-        <h1>🚀 Bienvenue sur mon site animé avec App Router !</h1>
-      </header>
+export default async function HomePage() {
+  try {
+    const { data } = await api.get("/articles?populate=*");
+    const articles = data?.data || []; // ✅ sécurisation contre undefined
+    // console.log("Articles récupérés :", articles);
 
-      <FadeInSection>
-        <h2>✨ Animation 1</h2>
-        <p>Cette section fade-in au scroll.</p>
-      </FadeInSection>
+    if (articles.length === 0) {
+      return <p style={{ textAlign: "center" }}>Aucun article trouvé.</p>;
+    }
 
-      <FadeInSection>
-        <h2>🔥 Animation 2</h2>
-        <p>Encore une animation fluide et SEO-friendly.</p>
-      </FadeInSection>
-    </>
-  );
+    return (
+      <>
+        <header style={{ textAlign: "center", padding: "40px" }}>
+          <h1>📰 Articles du Blog (Strapi)</h1>
+        </header>
+
+        {articles.map((a: any) => {
+          const attrs = a || {}; // ✅ sécurisation
+          return (
+            <FadeInSection key={a.id}>
+              <h2>
+                <Link href={`/blog/${attrs.slug || "#"}`}>
+                  {attrs.title || "Sans titre"}
+                </Link>
+              </h2>
+            </FadeInSection>
+          );
+        })}
+      </>
+    );
+  } catch (error) {
+    console.error("Erreur API Strapi :", error);
+    return <p style={{ color: "red", textAlign: "center" }}>Erreur lors du chargement des articles.</p>;
+  }
 }

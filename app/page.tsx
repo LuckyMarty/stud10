@@ -13,17 +13,17 @@ export default function HomePage() {
         <div>
           <GlitchText
             text="MOTION +"
-            fontSize="12rem"
+            fontSize="10rem"
             color="#000"
           />
           <GlitchText
             text="GRAPHISME"
-            fontSize="12rem"
+            fontSize="10rem"
             color="#000"
           />
           <GlitchText
             text="+ WEB DESIGN"
-            fontSize="12rem"
+            fontSize="10rem"
             color="#000"
           />
         </div>

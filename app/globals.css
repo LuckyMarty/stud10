@@ -1,3 +1,22 @@
+@font-face {
+  font-family: "N27";
+  src: url("../public/fonts/n27/n27-bold-webfont.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "N27";
+  src: url("../public/fonts/n27/n27-regular-webfont.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "N27";
+  src: url("../public/fonts/n27/n27-light-webfont.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

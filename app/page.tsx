@@ -1,44 +1,101 @@
-import Link from "next/link";
-import { api } from "../lib/strapi";
-import FadeInSection from "../components/FadeInSection";
-
-export const metadata = {
-  title: "Blog - Animé avec Strapi",
-  description: "Liste des articles depuis Strapi CMS",
-};
+"use client";
+import GlitchText from "@/components/new/GlitchText";
+import LyricsEffect from "@/components/new/LyricsEffect";
+import styled from "styled-components";
 
 export default async function HomePage() {
-  try {
-    const { data } = await api.get("/articles?populate=*");
-    const articles = data?.data || []; // ✅ sécurisation contre undefined
-    // console.log("Articles récupérés :", articles);
 
-    if (articles.length === 0) {
-      return <p style={{ textAlign: "center" }}>Aucun article trouvé.</p>;
-    }
+  return (
+    <PageStyled>
 
-    return (
-      <>
-        <header style={{ textAlign: "center", padding: "40px" }}>
-          <h1>📰 Articles du Blog (Strapi)</h1>
-        </header>
+      <div className="lm-hero">
+        <div>
+          <GlitchText
+            text="MOTION +"
+            fontSize="12rem"
+            color="#000"
+          />
+          <GlitchText
+            text="GRAPHISME"
+            fontSize="12rem"
+            color="#000"
+          />
+          <GlitchText
+            text="+ WEB DESIGN"
+            fontSize="12rem"
+            color="#000"
+          />
+        </div>
+      </div>
 
-        {articles.map((a: any) => {
-          const attrs = a || {}; // ✅ sécurisation
-          return (
-            <FadeInSection key={a.id}>
-              <h2>
-                <Link href={`/blog/${attrs.slug || "#"}`}>
-                  {attrs.title || "Sans titre"}
-                </Link>
-              </h2>
-            </FadeInSection>
-          );
-        })}
-      </>
-    );
-  } catch (error) {
-    console.error("Erreur API Strapi :", error);
-    return <p style={{ color: "red", textAlign: "center" }}>Erreur lors du chargement des articles.</p>;
-  }
+
+      <LyricsEffect
+        lines={[
+          "Quand la créativité sort des cases,",
+          "elle se transforme en magie.",
+          "Ici, nous allions originalité",
+          "et profesionnalisme pour faire",
+          "briller vos idées, en les voyant",
+          "sous un angle inattendu ce qui",
+          "nous permet de booster vos projets.",
+        ]}
+        uppercase={true}
+        fontSize="60px"
+        fontFamily="N27"
+      />
+
+
+      <div className="lm-text-2">
+        <p>
+          Motion design,  <br />
+          graphisme,  <br />
+          web design, <br />
+          illustrations…  <br />
+          Peu importe le projet,  <br />
+          l’idée, c’est de rendre  <br />
+          vos concepts mémorables !
+        </p>
+      </div>
+    </PageStyled>
+  );
 }
+
+
+const PageStyled = styled.div`
+  .lm-hero {
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+
+    > div {
+      margin: 0 auto;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+
+        >div:nth-of-type(2) {
+          align-self: end;
+        }
+      }
+    }
+  }
+
+
+  .lm-text-2 {
+    display: flex;
+    justify-content: end;
+
+    p {
+      text-align: left;
+      color: #696969;
+      font-size: 2rem;
+      font-family: "N27";
+      line-height: 1.5;
+      margin-right: 6rem;
+      margin-top: 6rem;
+      margin-bottom: 2rem;
+    }
+  }
+`;

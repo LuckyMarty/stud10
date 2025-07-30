@@ -1,5 +1,6 @@
 "use client";
 import { motion, useMotionValue, useTransform, useAnimationFrame } from "framer-motion";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function ImageSlider({ images }: { readonly images: readonly string[] }) {
@@ -48,7 +49,7 @@ export default function ImageSlider({ images }: { readonly images: readonly stri
         }}
       >
         {duplicatedImages.map((src, i) => (
-          <img
+          <Image
             key={i}
             src={src}
             alt=""

@@ -4,7 +4,7 @@ import ImageSlider from "@/components/new/ImageSlider";
 import LyricsEffect from "@/components/new/LyricsEffect";
 import styled from "styled-components";
 
-export default async function HomePage() {
+export default function HomePage() {
 
   return (
     <PageStyled>

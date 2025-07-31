@@ -35,7 +35,8 @@ export default function ImageSlider({ images }: { readonly images: readonly stri
         border: "none",
         padding: 0,
         background: "none",
-        cursor: "pointer"
+        cursor: "pointer",
+        zIndex: -1,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

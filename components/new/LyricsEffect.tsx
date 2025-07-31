@@ -31,7 +31,8 @@ export default function LyricsEffect({
         fontFamily,
         lineHeight: "1.3",
         color,
-        position: "relative"
+        position: "relative",
+        zIndex: -1,
       }}
       initial={{ opacity: 1 }} // keep visible ghost text
       whileInView={{ opacity: 1 }}
@@ -44,7 +45,7 @@ export default function LyricsEffect({
         return (
           <div
             key={li}
-            style={{ position: "relative", display: "block", whiteSpace: "pre" }}
+            style={{ position: "relative", display: "block", whiteSpace: "pre", zIndex: 0 }}
           >
             {/* 🔹 Ghost background */}
             <span
@@ -53,7 +54,8 @@ export default function LyricsEffect({
                 position: "absolute",
                 top: 0,
                 left: 0,
-                color: backgroundColor
+                color: backgroundColor,
+                zIndex: 0,
               }}
             >
               {line}
@@ -71,7 +73,7 @@ export default function LyricsEffect({
                     duration: 0.3
                   }}
                   viewport={{ once: true, amount: 0.2 }} // ✅ triggers per letter only when visible
-                  style={{ display: "inline", color }}
+                  style={{ display: "inline", color, zIndex: 0 }}
                 >
                   {letter === " " ? "\u00A0" : letter}
                 </motion.span>
